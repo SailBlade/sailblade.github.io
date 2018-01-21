@@ -47,8 +47,8 @@ author:
     - name: vk
       url:
 home:
-  section1: <h1></h1>
-  section2: <h2>A gem-based responsive simple texture styled Jekyll theme</h2>
+  section1: <h1>Sail Blade</h1>
+  section2: <h2>彷徨许多年，人生宛若初现</h2>
   section3: <div class="social-links"><a class="ico-github btn" href="https://github.com/SailBlade/sailblade.github.io" title="View on GitHub"></a></div>
 blog:
   cc_license: http://creativecommons.org/licenses/by-sa/4.0/ # A link to CC License of your choice.
