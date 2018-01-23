@@ -11,23 +11,10 @@ redirect_from:
 {:toc .toc}
 ---
 
-#1. Jekyll 的目录层次鸟瞰：  
-> |——_data  
-> |——_includes  
-> |——_layouts  
-> |——_posts  
-> |——_sass  
-> |——_site  
-> |——assets  
-> |——blog  
-> |——_config.yml  
-> |——Gemfile  
-> |——Gemfile.lock  
-> |——index.html  
-> |——search.json  
+# 1. Jekyll 的目录层次鸟瞰：  
+![alt text](http://p30p0kjya.bkt.clouddn.com/2018-01-24_005752%20Jekyll.png "Jekyll的目录结构")
 
-
-#2. 各目录或文件的意义  
+# 2. 各目录或文件的意义  
 #2.1   _data  
 
 #2.2   _includes 
@@ -38,7 +25,10 @@ redirect_from:
 
 #2.5   _sass  
 
-#2.6   _site 
+#2.6   _site  
+![alt text](http://p30p0kjya.bkt.clouddn.com/2018-01-24_010916_site.png "_site 的目录结构")  
+_site的目录如上所示，从实际的测试来看对应Blog的代码在修改后，Jekyll都会动态的在_site目录里生成新的代码，而此代码直接对应网页的显示。  
+如上图所示的 index.html就对应着blog的主页代码，修改对应代码内容，会直接体现在主页上。但是一段时间后，该值会被刷新为默认值。
 
 #2.7   assets 
 

@@ -77,6 +77,9 @@ group :jekyll_plugins do
 end  
 
 Run bundle install to install dependencies.  
-Run Jekyll with bundle exec jekyll serve  
+Run Jekyll with  
+
+> bundle exec jekyll serve  
+
 Hack away at http://localhost:4000!  
 
