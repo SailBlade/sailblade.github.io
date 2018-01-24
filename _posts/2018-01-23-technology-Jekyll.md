@@ -21,7 +21,12 @@ redirect_from:
 
 #2.3   _layouts 
 
-#2.4   _posts 
+#2.4   _posts  
+本目录下存放博客内容，文件名格式为  
+
+> yyyy-mm-dd-blogTitle.md  
+
+如 2018-01-23-technology-Jekyll.md.  
 
 #2.5   _sass  
 
@@ -50,4 +55,50 @@ home: 配置了主页的标题
 
 #2.15   _layouts 
 
-#2.16   _layouts 
+# 3. Jekyll 的语法剖析:  
+Jekeyll涉及到的语法有三种：
+## 3.1 Markdown语法  (GitHub方言)
+
+####  插入表格
+| First Header  | Second Header |  
+| ------------- | ------------- |  
+| Content Cell  | Content Cell  |  
+| Content Cell  | Content Cell  |  
+
+
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+
+注：表格前后都需要空行
+
+
+####  插入图片  
+
+> \![alt text\]\(/path/img.jpg "title"\)  
+
+####  代码语法高亮显示(GitHub markd 特性语法)
+代码语法高亮显示支持的语言有很多种，最常用的有 \{C, C#，C++, ruby, Python等\}，其余语言可参考 [github 语法高亮](https://github.com/github/linguist/blob/master/lib/linguist/languages.yml)
+
+> \`\`\`ruby  
+require 'redcarpet'  
+markdown = Redcarpet.new("Hello World!")  
+puts markdown.to_html  
+\`\`\`
+
+对应高亮显示后的格式如下:
+```ruby  
+require 'redcarpet'  
+markdown = Redcarpet.new("Hello World!")  
+puts markdown.to_html  
+```  
+
+## 3.2 Html  
+
+## 3.3 JavaScript  
+
+
+
+
+
