@@ -59,7 +59,7 @@ home: 配置了主页的标题
 Jekeyll涉及到的语法有三种：
 ## 3.1 Markdown语法  (GitHub方言)
 
- [github 的 Markdown 语法](https://github.com/github/linguist/blob/master/lib/linguist/languages.yml)
+ [github 的 Markdown 语法](http://sailblade.com/blog/2018/01/25/technology-Markdown/)
 
 ## 3.2 Html  
 
