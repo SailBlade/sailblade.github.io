@@ -33,12 +33,13 @@ redirect_from:
 > 爱因斯坦隔壁家王老二说过，知识使人有钱
 
 # 4. 引用代码  
-可以通过使用 \'Code\'，完成单个代码内容的引用  
-> 爱因斯坦隔壁家王老二说过: \'知识使人有钱\'  
- 
-> 爱因斯坦隔壁家王老二说过: \'知识使人有钱\' 
+可以通过使用 `Code`，完成单个代码内容的引用  
 
-当然也可以通过 \'\'\'Code\'\'\'完成代码段的引用
+爱因斯坦隔壁家王老二说过: \`知识使人有钱\`   
+ 
+爱因斯坦隔壁家王老二说过: `知识使人有钱`  
+
+当然也可以通过 \`\`\`Code\`\`\`完成代码段的引用
 
 >\`\`\`  
 git status  
@@ -66,10 +67,9 @@ git commit
 2. 其次  
 3. 最后  
 
-# 8. 取消Markdown语法解析
-转义字符 \ 当之无愧
 
-# 9. 插入表格
+# 8. 插入表格
+表格格式如下，需要在表头和表尾各插入一个空行。  
 | First Header  | Second Header |  
 | ------------- | ------------- |  
 | Content Cell  | Content Cell  |  
@@ -85,7 +85,7 @@ git commit
 
 
 
-# 10. 代码语法高亮
+# 9. 代码语法高亮
 代码语法高亮显示支持的语言有很多种，最常用的有 \{C, C#，C++, ruby, Python等\}，其余语言可参考 [github 语法高亮](https://github.com/github/linguist/blob/master/lib/linguist/languages.yml)
 
 > \`\`\`ruby  
@@ -100,3 +100,14 @@ require 'redcarpet'
 markdown = Redcarpet.new("Hello World!")  
 puts markdown.to_html  
 ```  
+
+# 10. Markdown 特殊符号  
+
+| Markdown 特殊符号  |    用途     |  
+| ------------- | ------------- |  
+|     \\        | 转义字符，取消Markdown语法解析器解析后续符号     |  
+|     \`        | TAB键上的反引号，在单句里使用可以标注命令或代码  |  
+
+
+# 11. 参考文档  
+[GitHub Help](https://help.github.com/articles/basic-writing-and-formatting-syntax/)
