@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Jekyll建立自己的Blog"
+title: "搭建Jekyll本地调试环境"
 description: "Build Blog"
 categories: [uncategorized]
 tags: [technology, jekyll]
