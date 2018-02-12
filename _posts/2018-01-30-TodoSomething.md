@@ -20,4 +20,10 @@ redirect_from:
 &emsp;&emsp;&emsp;&emsp;如自己对自身的评价过高时，可以看看周边环境的人，如我来说，住在一个混乱的小区，小区里面
 &emsp;&emsp;&emsp;&emsp;都是乱停车的邻居，也有偷拿床单被罩的邻居，牵狗狗随地大便的邻居，可能这就说明即使是自己
 &emsp;&emsp;&emsp;&emsp;有一定修养，但其实跟他们也差不多，因为我的修养不足以让我提升我的周遭的环境。所以我也是
-&emsp;&emsp;&emsp;&emsp;一个俗人，在外人跟他们看起来一样的俗人。
+&emsp;&emsp;&emsp;&emsp;一个俗人，在外人跟他们看起来一样的俗人。  
+&emsp;&emsp;人性与兽性  
+&emsp;&emsp;&emsp;&emsp;没有人性无法再社会上立足，没有兽性就无法生存下去。  
+&emsp;&emsp;见微知著  
+&emsp;&emsp;&emsp;&emsp;世界观人生观很难概况，只能通过面对不同问题的思索和分享来是别人知道,所以论语也是以短篇传世  
+&emsp;&emsp;
+
