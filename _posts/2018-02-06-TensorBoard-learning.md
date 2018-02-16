@@ -189,8 +189,8 @@ with graph.as_default():
 
         # Separate middle layer
         with tf.name_scope("intermediate_layer"):
-            b = tf.reduce_prod(a, name="product_b")
-            c = tf.reduce_sum(a, name="sum_c")
+            b = tf.reduce_prod(a, name="product_b") # 计算指定维度的元素相乘的总和
+            c = tf.reduce_sum(a, name="sum_c")      # 计算指定维度的元素总和
 
         # Separate output layer
         with tf.name_scope("output"):
@@ -252,11 +252,12 @@ writer.close()
 sess.close()
 
 # To start TensorBoard after running this file, execute the following command:
-# $ tensorboard --logdir='./improved_graph'  
+# $ tensorboard --logdir='./improved_graph'
 ```
 
-
-
+![exercise_transformation](http://p30p0kjya.bkt.clouddn.com/exercise_transformation.PNG)
+![Variable](http://p30p0kjya.bkt.clouddn.com/variables.PNG)
+![Summary](http://p30p0kjya.bkt.clouddn.com/Summary.PNG)
 
 ## 参考文献
 1. 《面向机器智能 TensorFlow实践》  Sam Abrahams, Danijar Hafner, Erik Erwitt, Ariel Scarpinelli  
