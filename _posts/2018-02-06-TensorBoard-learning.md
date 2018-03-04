@@ -9,7 +9,7 @@ redirect_from:
 ---  
   
 ## 启动TensorBoard  
-在完成数据流图生成后，在训练模型的同级目录输入 `tensorboard --logdir="C:\tensorflowLearning" --port 1234 --debug`  
+在完成数据流图生成后，在Anaconda Prompt中首先激活TensorFlow的环境，然后执行命令 `tensorboard --logdir="C:\tensorflowLearning" --port 1234 --debug`  
 
 
 ```python  

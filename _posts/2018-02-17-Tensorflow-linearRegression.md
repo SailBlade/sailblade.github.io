@@ -87,7 +87,12 @@ for step  in  range(101):
 
 ![参数收敛柱状图](http://p30p0kjya.bkt.clouddn.com/%E5%8F%82%E6%95%B0%E6%94%B6%E6%95%9B2.PNG)
 
-源码如下：
+## 3. 对线性回归案例的思考  
+   1. 从预测血脂量的案例看，预测值与实际值相差较大，如何评判该模型训练后准确率？ 
+      目前想到的只能是从训练样本中抽取测试样本，单独用来评估准确率。
+   2. 如果线性模型预测结果不尽如意，后续该如何处理？是尝试换模型，还是换求最小损失的函数或者步长？
+
+## 4. 源码  
 ```python
 import tensorflow as tf
 
@@ -169,13 +174,8 @@ with tf.Session() as sess:
 
 ```
 
-## 3. 线性回归案例后的思考  
-   1. 从预测血脂量的案例看，预测值与实际值相差较大，如何评判该模型训练后准确率？ 
-      目前想到的只能是从训练样本中抽取测试样本，单独用来评估准确率。
-   2. 如果线性模型预测结果不尽如意，后续该如何处理？是尝试换模型，还是换求最小损失的函数或者步长？
-      
 
-## 4. 参考文献
+## 5. 参考文献
 1. 《面向机器智能 TensorFlow实践》  Sam Abrahams, Danijar Hafner, Erik Erwitt, Ariel Scarpinelli  
 2.  根据年龄，体重预测血脂的代码    [Github 地址](https://github.com/backstopmedia/tensorflowbook)  
 
