@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Tensorflow 实践——softmax 分类"
+title: "Tensorflow 实践——softmax 回归分类"
 description: "softmax"
 categories: [machine learning]
 tags: [tensorflow, tensorboard, softmax]
@@ -12,14 +12,20 @@ redirect_from:
 ---
 
 
-## 1. softmax预测鸢尾花种类
+## 1. softmax回归预测鸢尾花种类
 根据鸢尾花的特征萼片的长宽，花瓣的长宽，推断鸢尾花的种类。{萼片的长度:sepal_length，萼片的宽度:sepal_width，花瓣的长度:petal_length，花瓣的宽度:petal_width，鸢尾花的种类:label}。  
 本例中的鸢尾花种类有如下三种{ Iris-setosa，Iris-versicolor，Iris-virginica}，数据格式如下  
 ![鸢尾花样本](http://p30p0kjya.bkt.clouddn.com/%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%95%B0%E6%8D%AE.PNG)
   
 ## 2. 训练框架  
-![矩阵元素](http://p30p0kjya.bkt.clouddn.com/%E7%9F%A9%E9%98%B5%E5%85%83%E7%B4%A0.PNG)  
-![对数几率回归](http://p30p0kjya.bkt.clouddn.com/%E5%AF%B9%E6%95%B0%E5%9B%9E%E5%BD%92%E5%AD%A6%E4%B9%A0.PNG)  
+#### 2.1 数据结构    
+1. 训练样本为 X: shape = (100,4);  
+2. weight参数为 W: shape = (4,3);
+3. Bias 参数 Bias: shape = (3,0),这里觉得不合理，X*W 与 Bias无法相加；  
+4. 预测 Y： shape = (100,3)。   
+![矩阵元素](http://p30p0kjya.bkt.clouddn.com/%E7%9F%A9%E9%98%B5%E5%85%83%E7%B4%A00310.PNG)  
+#### 2.2 程序框架     
+![softmax分类](http://p30p0kjya.bkt.clouddn.com/%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%B5%81%E7%A8%8B%E5%9B%BE.PNG)  
 
 ## 3. Feature Of This Framework
 1. tf.train.shuffle_batch 是将队列中数据打乱后，再读取出来。
@@ -35,7 +41,9 @@ redirect_from:
 ![鸢尾花的直方图](http://p30p0kjya.bkt.clouddn.com/%E9%B8%A2%E5%B0%BE%E8%8A%B1%E7%9B%B4%E6%96%B9%E5%9B%BE.PNG)  
 
 ## 5. softmax预测分类案例的思考  
-1. 
+1. softmax 与 sigmoid 差别是否就在于两个以上的分类？那么是否sigmoid就不支持 Y: shape = (100,3),
+但是看程序应用上是看不出来这里的差别的。  
+2. 如果softmax 应用在两个分类上，相比较sigmoid有什么优缺点呢？
 
 
 ## 6. 源码  
