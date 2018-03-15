@@ -34,6 +34,7 @@ sess.close()
 ![数据流图](http://p30p0kjya.bkt.clouddn.com/tensorboardLearning0213.PNG)  
   TensorFlow Operation 也称 Op, 是一些利用 Tensor对象执行运算的节点，为创造Op，需要在Python中调用其构造方法。调用时，需要传入计算机所需的所有Tensor参数以及对应的Op的属性。
 Python 构造方法将返回一个指向所创建Op的输出的句柄。
+![数据流图图例](http://p30p0kjya.bkt.clouddn.com/%E5%9B%BE%E4%BE%8B.PNG)
 
 ### name_scope
 如果希望在一个数据流图中对不同Op复用相同的name参数，则可以利用name_scope 将这些运算组织在一起，实现封装。  
