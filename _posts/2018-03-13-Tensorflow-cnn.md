@@ -3,7 +3,7 @@ layout: post
 title: "Tensorflow 实践——卷积神经网络"
 description: "CNN"
 categories: [machine learning]
-tags: [tensorflow, tensorboard, CNN]
+tags: [tensorflow, CNN]
 redirect_from: 
   - /2018/03/11/
 ---  
@@ -11,52 +11,33 @@ redirect_from:
 {:toc .toc}
 ---
 
-## 卷积神经网络介绍    
-卷积神经网络是当前处理图片分类的瑰宝级的架构。卷积神经网络依靠对图像像素一系列的滤波抽象出更高维度的特征。CNN包含如下三个部分：      
-1. 卷积层  
+## 1. 卷积神经网络介绍    
+卷积神经网络是当前处理图片分类的瑰宝级的架构。卷积神经网络依靠对图像像素一系列的滤波抽象出更高维度的特征。CNN包含如下三个部分：  
+1. 卷积层(Convolutional layers)  
 应用指定的卷积滤波数在图片上，每个子区域利用卷积产生一个单独值。卷积层通常应用ReLU激活函数。
 
-2. 池化层  
+2. 池化层(Pooling layers)    
 通过降采样卷积层输出的特征维度来降低处理时间。通常使用 2*2 最大池化。丢弃除最大值外的其他值。  
 
-3. 密集层(全连接层)
+3. 密集层(全连接层)(Dense (fully connected) layers)  
 对提取后的卷积层和降采样后的池化层的结果进行分类。本层的每个节点都对应着预测层的每个节点。
 
-## 1. 卷积神经网络预测数字(TensorFlow的官方案例)  
-提供28*28 = 784的像素，根据像素预测数字 
+## 2. 通过CNN识别MNIST    
+提供了若干 7*7 = 28 像素的图像，每个图像对应一个0 ~ 9的手写数字。识别图像中的数字。
 
-## 搭建CNN MINST分类
-1. 卷积层#1  
-   Applies 32 5x5 filters (extracting 5x5-pixel subregions), with ReLU activation function
-2. 池化层#1  
-   Performs max pooling with a 2x2 filter and stride of 2 (which specifies that pooled regions do not overlap)
-3. 卷积层#2  
-   第二个卷积层，应用64通道 5x5 滤波，使用ReLU激活函数。
-4. 池化层#2
-   第二个池化层呢过，进行2x2滤波，而且滑动间隔为2.
-5. 密集层 #1  
-   1024个神经元, 丢失正则化率为 0.4. 训练过程中任何元素丢弃概率为 0.4.  
-6. 密集层 #2  
-   10 个神经元，从0到9。    
+### 2.1 CNN识别模型的软件框架  
+![CNN识别模型软件框架](http://p30p0kjya.bkt.clouddn.com/CNN%E6%9E%B6%E6%9E%842.png)  
  
+### 2.2 样本数据格式    
+本案例中的[MINST数据集](http://yann.lecun.com/exdb/mnist/)有两个集合，共四个文件:  
+1. 60000张图片训练集  
+   1) train-images-idx3-ubyte: training set images (图像的像素集合)  
+   2) train-labels-idx1-ubyte: training set labels (图像对应的数字)  
+2. 10K 张图片的测试集，其中前5K是训练集中的图像，后5K是专门用于测试的图像。后5K的图片识别难度更大。  
+   1) t10k-images-idx3-ubyte:  test set images (图像的像素集合)   
+   2) t10k-labels-idx1-ubyte:  test set labels (图像对应的数字)
 
-
-
-
-## 2. 数据格式介绍  
-本案例中的数据共有四个文件
-
-train-images-idx3-ubyte: training set images  
-train-labels-idx1-ubyte: training set labels  
-t10k-images-idx3-ubyte:  test set images   
-t10k-labels-idx1-ubyte:  test set labels  
-
-The training set contains 60000 examples, and the test set 10000 examples.
-
-The first 5000 examples of the test set are taken from the original NIST training set. The last 5000 are taken from the original NIST test set. The first 5000 are cleaner and easier than the last 5000.
-
-TRAINING SET LABEL FILE (train-labels-idx1-ubyte):
-
+训练集存储图像对应数字的文件格式：(train-labels-idx1-ubyte)  
 
 | [offset] | [type]          | [value]          | [description] |
 | ---------- | ------------ | ----------- | -----------| 
@@ -69,7 +50,7 @@ TRAINING SET LABEL FILE (train-labels-idx1-ubyte):
 
 The labels values are 0 to 9.
 
-TRAINING SET IMAGE FILE (train-images-idx3-ubyte):
+训练集存储图像像素的文件格式：(train-images-idx3-ubyte 格式)  
 
 | [offset] | [type]        |   [value]       |    [description] | 
 | ---------- | ------------ | ----------- | -----------| 
@@ -84,7 +65,7 @@ TRAINING SET IMAGE FILE (train-images-idx3-ubyte):
 
 Pixels are organized row-wise. Pixel values are 0 to 255. 0 means background (white), 255 means foreground (black).
 
-TEST SET LABEL FILE (t10k-labels-idx1-ubyte):
+测试集存储图像对应数字的文件格式：(t10k-labels-idx1-ubyte)  
 
 | [offset] | [type]         |  [value]    |       [description] | 
 | ---------- | ------------ | ----------- | -----------| 
@@ -97,7 +78,7 @@ TEST SET LABEL FILE (t10k-labels-idx1-ubyte):
 
 The labels values are 0 to 9.
 
-TEST SET IMAGE FILE (t10k-images-idx3-ubyte):
+测试集存储图像像素的文件格式： (t10k-images-idx3-ubyte)  
 
 | [offset]   | [type]       |    [value]  |          [description] | 
 | ---------- | ------------ | ----------- | -----------| 
@@ -111,14 +92,25 @@ TEST SET IMAGE FILE (t10k-images-idx3-ubyte):
 | xxxx     | unsigned byte  |  ??                 | pixel | 
 
 
-## 2. 训练框架  
-#### 2.1 数据结构  
-1. x,   shape =[None,784]  
-2. y_,  shape =[None,10]  
-3. W,   shape =[784,10]  
-4. b,   shape =[10]  
+### 2.3 数据预处理  
 
-#### 2.2 程序框架     
+
+### 2.4 CNN框架
+1. 卷积层#1  
+   Applies 32 5x5 filters (extracting 5x5-pixel subregions), with ReLU activation function
+2. 池化层#1  
+   Performs max pooling with a 2x2 filter and stride of 2 (which specifies that pooled regions do not overlap)
+3. 卷积层#2  
+   第二个卷积层，应用64通道 5x5 滤波，使用ReLU激活函数。
+4. 池化层#2
+   第二个池化层呢过，进行2x2滤波，而且滑动间隔为2.
+5. 密集层 #1  
+   1024个神经元, 丢失正则化率为 0.4. 训练过程中任何元素丢弃概率为 0.4.  
+6. 密集层 #2  
+   10 个神经元，从0到9。    
+
+
+  
 
 ## 3. Feature Of This Framework
 
