@@ -29,7 +29,7 @@ redirect_from:
 ![CNN识别模型软件框架](http://p30p0kjya.bkt.clouddn.com/CNN%E6%9E%B6%E6%9E%842.png)  
  
 ### 2.2 样本数据格式    
-本案例中的[MINST数据集](http://yann.lecun.com/exdb/mnist/)有两个集合，共四个文件:  
+本案例中的[MNIST数据集](http://yann.lecun.com/exdb/mnist/)有两个集合，共四个文件:  
 1. 60000张图片训练集  
    1) train-images-idx3-ubyte: training set images (图像的像素集合)  
    2) train-labels-idx1-ubyte: training set labels (图像对应的数字)  
@@ -93,7 +93,126 @@ The labels values are 0 to 9.
 
 
 ### 2.3 数据预处理  
+定义数据对象 MNIST, 该对象有三个数据集组成：  
+    1) train 用于训练时的数据集；  
+	2) validation 从训练集中取出了前5000个图像，不清楚有什么具体用途；  
+	3) test  用于测试时的数据集。
 
+### 2.4 输入层  
+测试模型的输入张量的形状定义为 `[batch_size, image_width, image_height, channels]`：  
+* batch_size 训练中执行梯度下降的样本子集的大小；  
+* image_width 单个图像的宽；  
+* image_height 单个图像的高；    
+* channels 样本图像的颜色数量。一般为3(RGB),对于灰度图是1。  
+对于本例来说，输入层的形状为 [batch_size, 28, 28, 1]。  
+为了转换输入特征 map 到本形状，我们可以使用 reshape 函数
+`input_layer = tf.reshape(features["x"], [-1, 28, 28, 1])`  
+batch_size 值 -1指定了输入特征的维度是动态配置的。这代表batch_size像超参可以被调整。  
+
+### 2.5 卷积层 #1(Convolutional Layer #1)    	
+在第一卷积层，我们对输入层使用32通道的5 *5 滤波，然后再使用 ReLU激活函数。我们可以使用`conv2d()` 搭建本层。 
+  
+```python   
+conv1 = tf.layers.conv2d( 
+	  inputs=input_layer, 
+	  filters=32, 
+	  kernel_size=[5, 5], 
+	  padding="same", 
+	  activation=tf.nn.relu) 
+```  
+ 
+输入参数必须是形状为 `[batch_size, image_width, image_height, channels]`的装量。本例中为 `[batch_size, 28, 28, 1]`  
+`filter`参数指定了滤波的目标，本例中为32。 并且 `kernel_size` 指定了滤波的的维度 `[width, height]`,这里为 `[5, 5]`。  
+`padding`为枚举型{valid (default value), same}。如果指定输出张量与输入张量的高和宽一致，选择`padding=same`
+在本例中，将通过在输入张量的图片边缘添加0来保证高宽都为28。
+(如果不进行padding，一个5\*5卷积处理 28\*28的张量将生成一个 24*24的张量。)  
+`activation` 参数指定的卷积输出的激活函数，本例中我们使用 ReLU。  
+本例中通过 `con2d()`输出张量形状为 `[batch_size, 28, 28, 32]`，等同于输入张量，但是每个滤波器有32个通道。  
+	
+### 2.6 池化层 #1(Pooling Layer #1)    
+现在可以使用 `max_pooling2d()` 来搭建 2 * 2的滤波并且跳跃为2。  
+`pool1 = tf.layers.max_pooling2d(inputs=conv1, pool_size=[2, 2], strides=2)`  
+本层的输入张量形状为`[batch_size, image_width, image_height, channels]`。本例中输入张量为 `conv1`，
+即第一卷积层的输出，对应输出张量的形状为`[batch_size, 28, 28, 32]`  
+`pool_size`指定了最大池化滤波器的`[width, height]`,本例中为[2,2]。  
+`strides` 指定了跳跃的大小。本例中的跳跃度2，指示了滤波抽象间隔度宽和高分别为2个像素。  
+`max_pooling2d()`的输出张量的形状为 `[batch_size, 14, 14, 32]`: 2 * 2的滤波将减少高宽各 50%。  
+
+### 2.6 卷积层 #2 和池化层 #2  
+然后使用`conv2d()`和`max_pooling2d()` 创建第二卷积层。对于本层来说，
+配置了 64通道 5\*5的滤波器和ReLU的激活函数。并且对于池化层#2，我们仍然配置了和池化层#1相同的参数。
+(2*2最大池化，跳跃度为2)  
+
+```python    
+conv2 = tf.layers.conv2d(
+		inputs=pool1,
+		filters=64,
+		kernel_size=[5, 5],
+		padding="same",
+		activation=tf.nn.relu)
+
+pool2 = tf.layers.max_pooling2d(inputs=conv2, pool_size=[2, 2], strides=2)
+```  
+
+注意卷积层#2使用的是第一池化层的输出做为输入，生成张量的形状为  `[batch_size, 14, 14, 64]`，
+与池化层1相同的高宽配置，和64通道的滤波器。  
+池化层#2使用卷积层#2的输出做为输入。池化层#2输出张量的形状为 `[batch_size, 7, 7, 64]`
+(相比卷积层#2减少了一半的高和宽)。  
+
+### 2.7 连接层(Dense Layer)  
+然后添加一个连接层(1024个神经元和 ReLU激活函数)给CNN模型来根据卷积池化抽象出的结果进行分类。  
+在连接本层前，我么必须要想特征转换为2维`[batch_size, features]`。  
+`pool2_flat = tf.reshape(pool2, [-1, 7 \* 7 \* 64])`  
+在上面的`reshape()`操作中，-1代表 batch_size 的维度将会有输入数据动态计算。
+每个样本有 7 * 7 * 64 个特征，所以特征的维度为 7 \* 7 \* 64 。本层输出张量形状为 `[batch_size, 3136]`。  
+现在，我们可以使用 `dense()`连接层。  
+`dense = tf.layers.dense(inputs=pool2_flat, units=1024, activation=tf.nn.relu)`  
+`inputs`参数指定了输入张量：特征map。  
+`units`指定了连接层的神经元数量(1024).   
+`activation` 参数指定了激活函数为 ReLU。  
+为了改善模型，我们使用 dropout正则化到连接层。
+`dropout = tf.layers.dropout(
+inputs=dense, rate=0.4, training=mode == tf.estimator.ModeKeys.TRAIN)`  
+`inputs` 指定了输入张量，即连接层的输出张量。  
+`rate`指定了丢弃率，本例中的0.4代表在训练中随机丢弃 40%的结果。  
+`training`只是本模型是否在训练模式。dropout只有在训练模式才会丢弃。  
+本层的输出张量形状为 `[batch_size, 1024]`。 
+
+### 2.8 Logits 层(对数层)  
+神经网络的最后一层为对数层，这将返回我们预测的最终结果。
+本例中我们用10个神经元搭建了连接层，并使用了线性激活函数。  
+`logits = tf.layers.dense(inputs=dropout, units=10)`  	
+CNN最终的输出张量的形状为`[batch_size, 10]`。  
+	
+### 2.9 生成预测结果  
+CNN模型的对数层返回了预测的原始结果`[batch_size, 10]` 。
+我们需要将此结果转换为模型可以返回的两种格式：  
+
+* 每个图像的预测值： 数字 0~ 9.  
+* 每个图像每个可能目标的概率。 
+ 
+给定样本后，预测结果是最大概率的对数张量。我们可以通过 `tf.argmax`找到:  
+```python 
+tf.argmax(input=logits, axis=1)
+```  
+
+`input` 指定了提取出的最大值得张量。  
+`axis`指定了 `input`张量找最大值的轴。这里我们使用1 关联我们的预测。  
+我们可以使用 `tf.nn.softmax` 求导对数层来应用 softmax 激活。  
+`tf.nn.softmax(logits, name="softmax_tensor")`  
+我们在字典里编译预测，并返回 EstimatorSpec对象。  
+
+```python   
+predictions = {
+	"classes": tf.argmax(input=logits, axis=1),  
+	"probabilities": tf.nn.softmax(logits, name="softmax_tensor")  
+}  
+if mode == tf.estimator.ModeKeys.PREDICT:  
+	return tf.estimator.EstimatorSpec(mode=mode, predictions=predictions)  
+```  
+
+
+	
 
 ### 2.4 CNN框架
 1. 卷积层#1  
@@ -117,6 +236,11 @@ The labels values are 0 to 9.
 ## 4. 训练结果
 
 ## 5. softmax预测分类案例的思考  
+1. ReLU 激活函数的用途是什么？为什么第二层连接层没有？  
+2. 如果确定卷积核的大小 5 * 5 ？  
+3. 如何确定通道数32，又如何将通道数扩充到 64 ？  
+4. 计算正确率的Op比较奇怪，从计算图中看到应该和正常训练走相同的流程。是一种冗余么？  
+
 
 
 ## 6. 源码  
