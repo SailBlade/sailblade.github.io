@@ -105,9 +105,12 @@ The labels values are 0 to 9.
 * image_width 单个图像的宽；  
 * image_height 单个图像的高；    
 * channels 样本图像的颜色数量。一般为3(RGB),对于灰度图是1。  
+
 对于本例来说，输入层的形状为 [batch_size, 28, 28, 1]。  
 为了转换输入特征 map 到本形状，我们可以使用 reshape 函数
-`input_layer = tf.reshape(features["x"], [-1, 28, 28, 1])`  
+```python 
+input_layer = tf.reshape(features["x"], [-1, 28, 28, 1])
+```  
 batch_size 值 -1指定了输入特征的维度是动态配置的。这代表batch_size像超参可以被调整。  
 
 #### 2.1.4 卷积层 #1(Convolutional Layer #1)    	
@@ -163,7 +166,7 @@ pool2 = tf.layers.max_pooling2d(inputs=conv2, pool_size=[2, 2], strides=2)
 #### 2.1.7 连接层(Dense Layer)  
 然后添加一个连接层(1024个神经元和 ReLU激活函数)给CNN模型来根据卷积池化抽象出的结果进行分类。  
 在连接本层前，我么必须要想特征转换为2维`[batch_size, features]`。  
-`pool2_flat = tf.reshape(pool2, [-1, 7 \* 7 \* 64])`  
+`pool2_flat = tf.reshape(pool2, [-1, 7 * 7 * 64])`  
 在上面的`reshape()`操作中，-1代表 batch_size 的维度将会有输入数据动态计算。
 每个样本有 7 * 7 * 64 个特征，所以特征的维度为 7 \* 7 \* 64 。本层输出张量形状为 `[batch_size, 3136]`。  
 现在，我们可以使用 `dense()`连接层。  
@@ -363,11 +366,15 @@ INFO:tensorflow:Saving evaluation summary for step 20000: accuracy = 0.9733, los
 ```  
   
 
-## 3. Feature Of This Framework
+## 3. CNN学习后的心得
+1. 英文官方的源码模块化非常漂亮，代码很整洁。  
 
 
-## 4. softmax预测分类案例的思考  
-
+## 4. CNN MNIST分类案例的思考  
+1. 什么是激活函数，什么时候用?  
+2. 如何定义卷积核的shape，本案例中是[5 \* 5]?  
+3. 如何确定卷积层输出通道数，本例从 1 -> 32 -> 64?  
+4. 随机梯度下降的步长如何确定?  
 
 
 
@@ -679,7 +686,7 @@ if __name__ == "__main__":
 ```  
       
 
-## 7. 参考文献
+## 6. 参考文献
 1.  TensorFlow 官方教程      [TensorFlow官方教程](https://www.tensorflow.org/tutorials/layers)
 2.  TensorFlow 中文官方教程  [TensorFlow中文官方教程](http://www.tensorfly.cn/tfdoc/tutorials/mnist_pros.html)  
 3.  SHIHUC 个人博客          [SHIHUC个人博客](https://www.cnblogs.com/shihuc/p/6648130.html)
