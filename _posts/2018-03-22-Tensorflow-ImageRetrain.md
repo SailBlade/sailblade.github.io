@@ -89,6 +89,4 @@ Other Model Architectures section 选择加速你的网络。
       
 
 ## 6. 参考文献
-1.  TensorFlow 官方教程      [TensorFlow官方教程](https://www.tensorflow.org/tutorials/layers)
-2.  TensorFlow 中文官方教程  [TensorFlow中文官方教程](http://www.tensorfly.cn/tfdoc/tutorials/mnist_pros.html)  
-3.  SHIHUC 个人博客          [SHIHUC个人博客](https://www.cnblogs.com/shihuc/p/6648130.html)
+1.  TensorFlow 官方教程      [TensorFlow官方教程](https://www.tensorflow.org/tutorials/image_retraining)
