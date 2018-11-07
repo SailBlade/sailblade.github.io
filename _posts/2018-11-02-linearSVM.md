@@ -31,6 +31,10 @@ SVM的分类过程一般为如下所示，从中可知求解二次规划是SVM�
 | 0.97006|  0.970064|  1 |    
 | …… |  ……|  …… |
 
+可视化如下：   
+![](http://p30p0kjya.bkt.clouddn.com/%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%832.png)
+
+
 ### 1、将训练问题转换为二次规划问题，并拆出二次规划对应的因式    
 ![](http://p30p0kjya.bkt.clouddn.com/%E5%9B%BE%E7%89%873.png)   
 需要将上述SVM的最大间隔转化为如下形式：   
@@ -51,7 +55,7 @@ SVM的分类过程一般为如下所示，从中可知求解二次规划是SVM�
 ![](http://p30p0kjya.bkt.clouddn.com/%E5%85%AC%E5%BC%8F2018110303.png)   
 
 #### 5) 利用CVXOPT求得最优解如下：   
-![](http://p30p0kjya.bkt.clouddn.com/%E5%85%AC%E5%BC%8F2018110305.png)
+![](http://p30p0kjya.bkt.clouddn.com/%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%833.png)
 
 
 ##  源码     
@@ -69,6 +73,38 @@ def DoLinearSVM():
         def __init__(self):
             #self._b = np.zeros(1,dtype=np.float64)
             self._w = np.zeros(2)
+
+        def __sign__(self,a):
+            if a >= 0.0:
+                return 1
+            elif a < 0.0:
+                return -1
+
+        def __generateTrainData__(self):
+            X1 = np.random.uniform(-1.0,1.0,200)
+            X2 = np.random.uniform(-1.0,1.0,200)
+            B  = 0.03
+            W1=  0.3
+            W2=  0.8
+            Y = np.zeros(200)
+            for loop in range(Y.shape[0]):
+                Y[loop] = self.__sign__(W1 * X1[loop] + W2 * X2[loop] + B)
+
+            '''
+            noiseArray = np.random.rand(Y.shape[0])
+            for loop in range(Y.shape[0]):
+                if (noiseArray[loop]) > 0.9:
+                    Y[loop] = -1 * Y[loop]
+            '''
+
+            Xarray = np.stack((X1, X2), axis=-1)
+
+            self._X  = Xarray
+            self._Y = Y
+            self.sketchTrainDataMap()
+
+
+
 
         def train(self):
             Q = cvx.matrix(np.diag([0.0, 1.0,1.0])) # Q =[[0,0,0],[0,1,0],[0,0,1]]
@@ -133,11 +169,52 @@ def DoLinearSVM():
             ax.scatter(errorArrayX1, errorArrayX2,c='b', marker="+")
 
             x1Array,x2Array = np.split(self._X,self._X.shape[1],axis = 1)
-            ax.scatter(x1Array, x2Array, optimalYArray,c='orangered', marker=".")
+            #ax.scatter(x1Array, x2Array, optimalYArray,c='orangered', marker=".")
+            x1Array = np.reshape(x1Array,(self._X.shape[0]))
+            x2Array = np.reshape(x2Array, (self._X.shape[0]))
+            print (type(x1Array),self._X.shape[0],x1Array.shape)
+            x1SplitResult = np.split(x1Array, [10, self._X.shape[0]],axis = 0)
+            x2SplitResult = np.split(x2Array, [10, self._X.shape[0]],axis = 0)
+            x1Array, x2Array = np.meshgrid(x1SplitResult[0], x2SplitResult[0])  # 将坐标向量变为坐标矩阵，列为x的长度，行为y的长度
+            print(x1Array.shape,x2Array.shape)
+            optimalYArray = self._w1 * x1Array + self._w2 * x2Array +self._b
+            ax.plot_surface(x1Array, x2Array, optimalYArray, rstride=1, cstride=1,color='coral', linewidth=0, antialiased=True,alpha=0.1)
+            ax.set_xlabel("x1-label", color='r')
+            ax.set_ylabel("x2-label", color='g')
+            ax.set_zlabel("Y-label", color='b')
+
+            fig.suptitle('Linear SVM ')
+            plt.savefig("Linear_SVM.png")
+            plt.show()
+
+        def sketchTrainDataMap(self):
+            correctListX1 = []
+            correctListX2 = []
+
+            errorListX1 = []
+            errorListX2 = []
+
+            for loop in range(self._Y.shape[0]):
+                if self._Y[loop] == 1:
+                    correctListX1.append(self._X[loop][0])
+                    correctListX2.append(self._X[loop][1])
+                else:
+                    errorListX1.append(self._X[loop][0])
+                    errorListX2.append(self._X[loop][1])
+
+            correctArrayX1 = np.array(correctListX1)
+            correctArrayX2 = np.array(correctListX2)
+            errorArrayX1   = np.array(errorListX1)
+            errorArrayX2    = np.array(errorListX2)
+
+
+            fig, ax = plt.subplots(1, 1)
+            ax = fig.gca(projection='3d')
+            ax.scatter(correctArrayX1, correctArrayX2,c='g', marker="x")
+            ax.scatter(errorArrayX1, errorArrayX2,c='b', marker="+")
             fig.suptitle('Linear SVM ')
 
             plt.show()
-
 
         def loadTrainData(self,fileLocation):
             data = []
@@ -160,13 +237,14 @@ def DoLinearSVM():
             self._Y = labelArray
 
     linearSVMObj = LinearSVM()
-    linearSVMObj.loadTrainData( 'G:\\林轩田教程\\MachineLearningFoundations\\homework5\\data\\question13_TRAIN.txt')
+    linearSVMObj.__generateTrainData__()
+    #linearSVMObj.loadTrainData( 'G:\\林轩田教程\\MachineLearningFoundations\\homework5\\data\\question13_TRAIN.txt')
     linearSVMObj.train()
-
 
 
 if __name__ == "__main__":
     DoLinearSVM()
+
 
 ```    
 
