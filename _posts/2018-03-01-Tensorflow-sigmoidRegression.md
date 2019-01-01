@@ -14,10 +14,10 @@ redirect_from:
 
 ## 1. 对数几率回归预测泰坦尼克号上乘客的生存率
 有一艘著名的船泰坦尼克号沉没了，这里有一份乘客名单，分别给出了生存人员的性别，舱位，年龄。 则根据失踪人员的对应信息，推测生存概率。
-![乘客名单](http://p30p0kjya.bkt.clouddn.com/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E5%8F%B7%E7%9A%84%E5%90%8D%E5%8D%95.PNG)
+![乘客名单](http://images.sailblade.com/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E5%8F%B7%E7%9A%84%E5%90%8D%E5%8D%95.PNG)
   
 ## 2. 训练框架  
-![对数几率回归](http://p30p0kjya.bkt.clouddn.com/%E5%AF%B9%E6%95%B0%E5%9B%9E%E5%BD%92%E5%AD%A6%E4%B9%A0.PNG)  
+![对数几率回归](http://images.sailblade.com/%E5%AF%B9%E6%95%B0%E5%9B%9E%E5%BD%92%E5%AD%A6%E4%B9%A0.PNG)  
 
 ## 3. Feature Of This Framework
 1. csv数据读取到TensorFlow中；
@@ -27,11 +27,11 @@ redirect_from:
 
 ## 4. 训练结果
 如下图Loss收敛来看，说明随着样本量的增加，Loss在逐步收敛，应该代表模型是有效的。   
-![Loss收敛速度](http://p30p0kjya.bkt.clouddn.com/loss0306.PNG)  
+![Loss收敛速度](http://images.sailblade.com/loss0306.PNG)  
 如下图所示，weight最终收敛为5个值，此图主要体现达到训练量后，最终收敛的值。    
-![参数收敛速度](http://p30p0kjya.bkt.clouddn.com/histogram0306.PNG)  
+![参数收敛速度](http://images.sailblade.com/histogram0306.PNG)  
 下图只能看出参数随样本量增加的收敛速度。  
-![参数收敛速度](http://p30p0kjya.bkt.clouddn.com/Distruibution0306.PNG)
+![参数收敛速度](http://images.sailblade.com/Distruibution0306.PNG)
 
 ## 5. 对数几率回归案例的思考  
 1. 本案例对训练结果进行评估。根据features 预测生存率并给出和真实生存率的预测成功率。  

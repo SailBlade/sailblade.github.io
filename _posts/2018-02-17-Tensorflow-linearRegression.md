@@ -21,12 +21,12 @@ redirect_from:
 4. 计算预测值 y_prediction 与训练样本 y 的方差；  
 5. 利用梯度下降求weight，bias 使得方差最小；  
 如下图所示, 随着x_axis 样本点的增加，训练方差收敛到 0。  
-![loss收敛](http://p30p0kjya.bkt.clouddn.com/%E9%A2%84%E6%B5%8B%E7%BB%93%E6%9E%9C2018022803.PNG)  
+![loss收敛](http://images.sailblade.com/%E9%A2%84%E6%B5%8B%E7%BB%93%E6%9E%9C2018022803.PNG)  
 如下图所示，随着x_axis 样本点的增加，weight收敛到 0.3， bias收敛到 0.1。  
-![分布图](http://p30p0kjya.bkt.clouddn.com/%E9%A2%84%E6%B5%8B%E7%BB%93%E6%9E%9C2018022802.PNG)  
+![分布图](http://images.sailblade.com/%E9%A2%84%E6%B5%8B%E7%BB%93%E6%9E%9C2018022802.PNG)  
 5. 获得线性方程的参数 weight = 0.3, bias = 0.1。  
 如下图所示, 随着y_axis 样本点的增加, 参数 weight, bias 收敛到一个区间内。  
-![柱状图](http://p30p0kjya.bkt.clouddn.com/%E9%A2%84%E6%B5%8B%E7%BB%93%E6%9E%9C2018022801.PNG)  
+![柱状图](http://images.sailblade.com/%E9%A2%84%E6%B5%8B%E7%BB%93%E6%9E%9C2018022801.PNG)  
 
 
 源码如下：
@@ -76,16 +76,16 @@ for step  in  range(101):
 2. `inference()`将训练样本中的年龄，血脂代入线性方程 tf.matmul(X, W) + b 中，获得预测值 y_prediction;
 3. `loss()`利用步骤2 的 y_prediction 和训练样本中的 血脂求方差并累计求和 ；(利用广义最小二乘性，方差和累积最小，则函数越接近)  
 如下图所示，可以看到随着 x_axis 样本量的增加，方差在逐渐缩小，但相比本章案例1的损失函数，该损失较大 5.3 * power(10, 6), 收敛不明显  
-![损失函数](http://p30p0kjya.bkt.clouddn.com/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0.PNG)  
+![损失函数](http://images.sailblade.com/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0.PNG)  
 4. `train()`利用梯度下降找到最小最近似的参数。  
 如下图所示：
     * Bias 随着 x_axis 样本量的增加收敛到 1.01；
     * Weight 随着 x_axis 样本量的增加不会收敛，但是从柱状图可以明显看到分布于 1.6,3.6附近的区域。可能后续需要其它手段进行优化。  
 
     
-![参数收敛曲线图](http://p30p0kjya.bkt.clouddn.com/%E5%8F%82%E6%95%B0%E6%94%B6%E6%95%9B.PNG)
+![参数收敛曲线图](http://images.sailblade.com/%E5%8F%82%E6%95%B0%E6%94%B6%E6%95%9B.PNG)
 
-![参数收敛柱状图](http://p30p0kjya.bkt.clouddn.com/%E5%8F%82%E6%95%B0%E6%94%B6%E6%95%9B2.PNG)
+![参数收敛柱状图](http://images.sailblade.com/%E5%8F%82%E6%95%B0%E6%94%B6%E6%95%9B2.PNG)
 
 ## 3. 对线性回归案例的思考  
    1. 从预测血脂量的案例看，预测值与实际值相差较大，如何评判该模型训练后准确率？ 

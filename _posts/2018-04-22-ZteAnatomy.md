@@ -27,10 +27,10 @@ redirect_from:
 ## [2017/03/07 美国商业部宣布由于中兴公司违反出口伊朗和朝鲜禁令处罚11.9亿美元](https://www.commerce.gov/news/press-releases/2017/03/secretary-commerce-wilbur-l-ross-jr-announces-119-billion-penalty)  
 
 BIS 根据中兴的违法行为开出了11.9亿美元的天价罚款以及其他附加条目，具体如下  
-![2017年罚单内容](http://p30p0kjya.bkt.clouddn.com/2017%E5%B9%B4%E7%BD%9A%E5%8D%95.PNG)  
+![2017年罚单内容](http://images.sailblade.com/2017%E5%B9%B4%E7%BD%9A%E5%8D%95.PNG)  
 
 BIS 提供的调查报告的时间目录如下所示  
-![BIS调查时间轴](http://p30p0kjya.bkt.clouddn.com/BIS%E8%B0%83%E6%9F%A5%E6%97%B6%E9%97%B4%E8%BD%B4.PNG)  
+![BIS调查时间轴](http://images.sailblade.com/BIS%E8%B0%83%E6%9F%A5%E6%97%B6%E9%97%B4%E8%BD%B4.PNG)  
 
 ## [2017/04/16 美国商业部宣布激活中兴罚单](https://www.commerce.gov/news/press-releases/2018/04/secretary-ross-announces-activation-zte-denial-order-response-repeated)
 美国商业部判处中兴在2016年的措施商讨阶段虚假陈述
@@ -41,20 +41,20 @@ BIS 提供的调查报告的时间目录如下所示
 
 ## 对于中兴的第一次违规，BIS提供的PPT   
 
-![BIS01](http://p30p0kjya.bkt.clouddn.com/01BIS.PNG)
-![BIS02](http://p30p0kjya.bkt.clouddn.com/02BIS.PNG)
-![BIS03](http://p30p0kjya.bkt.clouddn.com/03BIS.PNG)
-![BIS04](http://p30p0kjya.bkt.clouddn.com/04BIS.PNG)
-![BIS05](http://p30p0kjya.bkt.clouddn.com/05BIS.PNG)
-![BIS06](http://p30p0kjya.bkt.clouddn.com/06BIS.PNG)
-![BIS07](http://p30p0kjya.bkt.clouddn.com/07BIS.PNG)
-![BIS08](http://p30p0kjya.bkt.clouddn.com/08BIS.PNG)
-![BIS09](http://p30p0kjya.bkt.clouddn.com/09BIS.PNG)
-![BIS10](http://p30p0kjya.bkt.clouddn.com/10BIS.PNG)
-![BIS11](http://p30p0kjya.bkt.clouddn.com/11BIS.PNG)
-![BIS12](http://p30p0kjya.bkt.clouddn.com/12BIS.PNG)
-![BIS13](http://p30p0kjya.bkt.clouddn.com/13BIS.PNG)
-![BIS14](http://p30p0kjya.bkt.clouddn.com/14BIS.PNG)
+![BIS01](http://images.sailblade.com/01BIS.PNG)
+![BIS02](http://images.sailblade.com/02BIS.PNG)
+![BIS03](http://images.sailblade.com/03BIS.PNG)
+![BIS04](http://images.sailblade.com/04BIS.PNG)
+![BIS05](http://images.sailblade.com/05BIS.PNG)
+![BIS06](http://images.sailblade.com/06BIS.PNG)
+![BIS07](http://images.sailblade.com/07BIS.PNG)
+![BIS08](http://images.sailblade.com/08BIS.PNG)
+![BIS09](http://images.sailblade.com/09BIS.PNG)
+![BIS10](http://images.sailblade.com/10BIS.PNG)
+![BIS11](http://images.sailblade.com/11BIS.PNG)
+![BIS12](http://images.sailblade.com/12BIS.PNG)
+![BIS13](http://images.sailblade.com/13BIS.PNG)
+![BIS14](http://images.sailblade.com/14BIS.PNG)
 
 
 

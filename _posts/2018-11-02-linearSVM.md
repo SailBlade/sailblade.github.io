@@ -32,30 +32,30 @@ SVM的分类过程一般为如下所示，从中可知求解二次规划是SVM�
 | …… |  ……|  …… |
 
 可视化如下：   
-![](http://p30p0kjya.bkt.clouddn.com/%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%832.png)
+![](http://images.sailblade.com/%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%832.png)
 
 
 ### 1、将训练问题转换为二次规划问题，并拆出二次规划对应的因式    
-![](http://p30p0kjya.bkt.clouddn.com/%E5%9B%BE%E7%89%873.png)   
+![](http://images.sailblade.com/%E5%9B%BE%E7%89%873.png)   
 需要将上述SVM的最大间隔转化为如下形式：   
-![](http://p30p0kjya.bkt.clouddn.com/%E5%9B%BE%E7%89%872.png)    
+![](http://images.sailblade.com/%E5%9B%BE%E7%89%872.png)    
  
 
 ### 2、对上述待训练数据的处理过程   
 #### 1) 由于上述训练数据分别有两个参数，X1，X2，所以需要转换的二次规划问题目标为：   
-![](http://p30p0kjya.bkt.clouddn.com/%E5%85%AC%E5%BC%8F5.png)   
+![](http://images.sailblade.com/%E5%85%AC%E5%BC%8F5.png)   
 
 #### 2) 对目标函数限制条件转换为二次规划的转换流程为：   
-![](http://p30p0kjya.bkt.clouddn.com/%E5%85%AC%E5%BC%8F2018110301.png)   
+![](http://images.sailblade.com/%E5%85%AC%E5%BC%8F2018110301.png)   
 
 #### 3) 由上述流程转换后可得：   
-![](http://p30p0kjya.bkt.clouddn.com/%E5%85%AC%E5%BC%8F2018110302.png)   
+![](http://images.sailblade.com/%E5%85%AC%E5%BC%8F2018110302.png)   
 
 #### 4) 由上述流程转换后可得：   
-![](http://p30p0kjya.bkt.clouddn.com/%E5%85%AC%E5%BC%8F2018110303.png)   
+![](http://images.sailblade.com/%E5%85%AC%E5%BC%8F2018110303.png)   
 
 #### 5) 利用CVXOPT求得最优解如下：   
-![](http://p30p0kjya.bkt.clouddn.com/%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%833.png)
+![](http://images.sailblade.com/%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%833.png)
 
 
 ##  源码     

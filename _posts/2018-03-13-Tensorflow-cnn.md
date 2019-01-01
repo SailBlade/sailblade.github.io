@@ -24,10 +24,10 @@ redirect_from:
 
 ## 2. 通过CNN识别MNIST    
 提供了若干 7*7 = 28 像素的图像，每个图像对应一个0 ~ 9的手写数字。识别如下图像中的数字。  
-![待识别的数字图像](http://p30p0kjya.bkt.clouddn.com/mnist_0-9.png)  
+![待识别的数字图像](http://images.sailblade.com/mnist_0-9.png)  
 
 ### 2.1 CNN MNIST识别模型的软件框架  
-![CNN识别模型软件框架](http://p30p0kjya.bkt.clouddn.com/CNN%E6%9E%B6%E6%9E%842.png)  
+![CNN识别模型软件框架](http://images.sailblade.com/CNN%E6%9E%B6%E6%9E%842.png)  
  
 #### 2.1.1 样本数据格式    
 本案例中的[MNIST数据集](http://yann.lecun.com/exdb/mnist/)有两个集合，共四个文件:  
